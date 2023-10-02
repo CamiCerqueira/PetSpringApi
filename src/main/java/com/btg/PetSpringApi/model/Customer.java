@@ -28,6 +28,9 @@ public class Customer {
     @Column (name = "phoneNumber", nullable = false)
     private String phoneNumber;
     private Boolean active;
+
+    @Column(name = "password",nullable = false)
+    private String password;
 }
 
 

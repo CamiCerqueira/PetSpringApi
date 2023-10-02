@@ -21,7 +21,7 @@ public class ProductConvert {
 
     }
 
-    public static ProductResponse toResponse(Product product){
+    public static ProductResponse toResponse(Product product) {
         ProductResponse productResponse = new ProductResponse();
         productResponse.setId(product.getId());
         productResponse.setName(product.getName());
@@ -29,14 +29,14 @@ public class ProductConvert {
         productResponse.setType(TypeProductConvert.toResponse(product.getType()));
         return productResponse;
 
-
-    public static List<ProductResponse> toResponseList(List<Product> products) {
+        public static List<ProductResponse>(List<Product> products){
             List<ProductResponse> productResponses = new ArrayList<>();
-            for (Product product : products)
-                productResponses.add(toResponse(product));
+            for (Product product: products) {
+               productResponses.add(toResponse(product));
             }
 
             return productResponses;
         }
+    }
 
 }
