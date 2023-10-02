@@ -54,14 +54,14 @@ public class UserEmployeeService {
 
     public void deleteUser(Integer id){
         UserEmployee userEmployee = userEmployeeRepository.findById(id).orElseThrow();
-        user.setActive(false);
-        userEmployeeRepository.save(user);
+        userEmployee.setActive(false);
+        userEmployeeRepository.save(userEmployee);
     }
 
     public UserEmployeeResponse updateUser(Integer id, UserEmployeeRequest userRequest){
-        UserEmployee userEmkployee = UserEmployeeConvert.toEntity(userRequest);
-        userEmkployee.setId(id);
-        return UserEmployeeConvert.toResponse(userEmployeeRepository.save(userEmkployee));
+        UserEmployee userEmployee = UserEmployeeConvert.toEntity(userRequest);
+        userEmployee.setId(id);
+        return UserEmployeeConvert.toResponse(userEmployeeRepository.save(userEmployee));
     }
 
 }
