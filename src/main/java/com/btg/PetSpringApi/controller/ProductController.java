@@ -2,6 +2,7 @@ package com.btg.PetSpringApi.controller;
 
 import com.btg.PetSpringApi.controller.dto.ProductRequest;
 import com.btg.PetSpringApi.controller.dto.ProductResponse;
+import com.btg.PetSpringApi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
