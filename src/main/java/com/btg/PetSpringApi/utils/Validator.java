@@ -1,6 +1,6 @@
 package com.btg.PetSpringApi.utils;
 
-public class Validor {
+public class Validator {
 
     public static Boolean passwordValidate(String password){
         return password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*\\W).{8,}$");

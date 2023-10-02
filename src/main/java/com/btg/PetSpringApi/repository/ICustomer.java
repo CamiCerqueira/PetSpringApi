@@ -16,7 +16,7 @@ public interface ICustomer extends JpaRepository<Customer, Integer> {
     Page<Customer> findAll(Pageable pageable);
 
 
-    Optional<Customer> findByPhoneNumber (String phoneNumber);
+    Optional<Customer> findByPhoneNumber(String phoneNumber);
     List<Customer> findAllByName (String name);
 
 }
