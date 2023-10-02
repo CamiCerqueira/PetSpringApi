@@ -1,6 +1,13 @@
 package com.btg.PetSpringApi.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Table (name = "services")
+@Getter
+@Setter
 
 public class PetService {
 
@@ -9,10 +16,10 @@ public class PetService {
     private Integer id;
 
     @Column(name = "name", nullable = false)
-    private Integer name;
+    private String name;
 
     @Column (name = "price", nullable = false)
-    private Integer price;
+    private Double price;
 
     @ManyToOne()
     private TypePetService type;

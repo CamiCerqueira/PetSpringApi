@@ -31,7 +31,7 @@ public class UserEmployee {
     private String email;
 
     @Column(name = "password", nullable = false)
-    private Integer password;
+    private String password;
 
     private Boolean active;
 

@@ -1,8 +1,9 @@
 package com.btg.PetSpringApi.controller.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 
-@Getter
+@Getter @Setter
 public class ProductRequest {
     private String name;
     private Double price;

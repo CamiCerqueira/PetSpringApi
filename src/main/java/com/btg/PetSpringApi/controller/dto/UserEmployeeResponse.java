@@ -4,9 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class ProductResponse {
+public class UserEmployeeResponse {
     private Integer id;
     private String name;
-    private Double price;
-    private TypeProductResponse type;
+    private String email;
 }

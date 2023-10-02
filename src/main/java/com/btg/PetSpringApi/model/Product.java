@@ -15,10 +15,10 @@ public class Product {
     private Integer id;
 
     @Column(name = "name", nullable = false)
-    private Integer name;
+    private String name;
 
     @Column (name = "price", nullable = false)
-    private Integer price;
+    private Double price;
 
     @ManyToOne ()
     private TypeProduct type;

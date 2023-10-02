@@ -19,15 +19,15 @@ public class Pet {
     private Integer id;
 
     @Column (name = "name", nullable = false)
-    private Integer name;
+    private String name;
 
     @Column (name = "age", nullable = false)
-    private Integer age;
+    private Double age;
 
     @Column (name = "weight", nullable = false)
-    private Integer weight;
+    private Double weight;
 
     @Column (name = "breed", nullable = false)
-    private Integer breed;
+    private String breed;
 
 }

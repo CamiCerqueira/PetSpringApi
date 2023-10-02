@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-class TypeProductResponse {
+public class TypeProductResponse {
     private Integer id;
     private String name;
 }

@@ -1,21 +1,19 @@
 package com.btg.PetSpringApi.controller.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-
-@Setter @Getter
+@Getter @Setter
 @AllArgsConstructor
-public class CustomerRequest {
+public class UserEmployeeRequest {
     @NotBlank()
     @Length(min = 3, max = 35)
     private String name;
     @Email
-    private String phoneNumber;
+    private String email;
 
     private String password;
-
 }

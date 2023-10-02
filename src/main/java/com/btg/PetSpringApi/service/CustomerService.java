@@ -5,6 +5,8 @@ import com.btg.PetSpringApi.controller.dto.CustomerResponse;
 import com.btg.PetSpringApi.controller.exception.PasswordValidationError;
 import com.btg.PetSpringApi.model.Customer;
 import com.btg.PetSpringApi.repository.ICustomer;
+import com.btg.PetSpringApi.utils.CustomerConvert;
+import com.btg.PetSpringApi.utils.Validor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,7 +34,7 @@ public class CustomerService {
     public CustomerResponse saveUser(CustomerRequest userDTO) throws PasswordValidationError {
         Customer customer = CustomerConvert.toEntity(userDTO);
         customer.setActive(true);
-        if(!Validator.passwordValidate(customer.getPassword())) throw new PasswordValidationError("Senha deve seguir o padrao");
+        if(!Validor.passwordValidate(customer.getPassword())) throw new PasswordValidationError("Senha deve seguir o padrao");
         Customer userEntity = customerRepository.save(customer);
         return CustomerConvert.toResponse(userEntity);
     }

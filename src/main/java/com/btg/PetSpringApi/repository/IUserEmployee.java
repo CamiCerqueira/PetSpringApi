@@ -1,6 +1,6 @@
 package com.btg.PetSpringApi.repository;
 
-import com.btg.PetSpringApi.model.UserEmployee;
+import com.btg.PetSpringApi.utils.UserEmployee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
