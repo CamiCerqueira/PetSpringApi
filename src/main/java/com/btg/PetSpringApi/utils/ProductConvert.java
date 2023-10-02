@@ -29,14 +29,13 @@ public class ProductConvert {
         productResponse.setType(TypeProductConvert.toResponse(product.getType()));
         return productResponse;
 
-        public static List<ProductResponse>(List<Product> products){
-            List<ProductResponse> productResponses = new ArrayList<>();
-            for (Product product: products) {
-               productResponses.add(toResponse(product));
-            }
-
-            return productResponses;
-        }
     }
 
+    public static List<ProductResponse> toResponseList(List<Product> products) {
+        List<ProductResponse> productResponses = new ArrayList<>();
+        for (Product product : products) {
+            productResponses.add(toResponse(product));
+        }
+        return productResponses;
+    }
 }

@@ -2,9 +2,8 @@ package com.btg.PetSpringApi.controller;
 
 import com.btg.PetSpringApi.controller.dto.UserEmployeeRequest;
 import com.btg.PetSpringApi.controller.dto.UserEmployeeResponse;
-import com.btg.PetSpringApi.model.UserEmployee;
+import com.btg.PetSpringApi.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ import java.util.List;
 @RequestMapping ("/user")
 public class UserEmployeeController {
     @Autowired
-    UserEmployeeService userEmployeeService;
+    CustomerService userEmployeeService;
     @RequestMapping
     public ResponseEntity <Page<UserEmployeeResponse>> getUsers(
             @RequestParam(value = "page",
