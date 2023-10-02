@@ -1,4 +1,4 @@
-package com.btg.PetSpringApi.controller.exception;
+package com.btg.PetSpringApi.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
