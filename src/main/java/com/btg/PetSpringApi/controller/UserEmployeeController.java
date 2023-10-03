@@ -2,7 +2,8 @@ package com.btg.PetSpringApi.controller;
 
 import com.btg.PetSpringApi.controller.dto.UserEmployeeRequest;
 import com.btg.PetSpringApi.controller.dto.UserEmployeeResponse;
-import com.btg.PetSpringApi.service.CustomerService;
+import com.btg.PetSpringApi.controller.exception.PasswordValidationError;
+import com.btg.PetSpringApi.service.UserEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -12,56 +13,54 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/user")
+@RequestMapping("/userEmployee")
 public class UserEmployeeController {
+
     @Autowired
-    CustomerService userEmployeeService;
-    @RequestMapping
-    public ResponseEntity <Page<UserEmployeeResponse>> getUsers(
-            @RequestParam(value = "page",
-                    required = false,
-                    defaultValue = "0"
-            ) int page,
-            @RequestParam(
-                    value = "size",
-                    required = false,
-                    defaultValue = "10"
-            ) int size,
-            @RequestParam(
-                    value = "direction",
-                    required = false,
-                    defaultValue = "ASC"
-            ) String direction)
-    {return ResponseEntity.ok(userEmployeeService.GetUserEmployeeService;
-            UserEmployeeResponse user =  userEmployeeService.saveUserEmployeeService (userDTO);
-            return ResponseEntity.created(URI.create("/user/"+user.getId())).body(user);
-        }
+    UserEmployeeService userEmployeeService;
 
-        @GetMapping("/{id}")
-        public ResponseEntity<UserEmployeeResponse> getUser(@PathVariable Integer id){
-            return ResponseEntity.ok(userEmployeeService.GetUserEmployeeService.ByResponse(id));
-        }
+    @GetMapping
+    public ResponseEntity<Page<UserEmployeeResponse>> getUserEmployees(
+            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+            @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
+        return ResponseEntity.ok(userEmployeeService.getUserEmployee(page, size, direction));
+    }
 
-        @GetMapping("/email/{email}")
-        public ResponseEntity<UserEmployeeResponse> getUserByEmail(@PathVariable String email){
-            return  ResponseEntity.ok(userEmployeeService.GetUserByEmail(email));
-        }
+    @PostMapping
+    public ResponseEntity<UserEmployeeResponse> saveUserEmployee(@RequestBody UserEmployeeRequest userEmployeeDTO)
+            throws PasswordValidationError {
+        UserEmployeeResponse userEmployee = userEmployeeService.saveUserEmployee(userEmployeeDTO);
+        return ResponseEntity.created(URI.create("/userEmployee/" + userEmployee.getId())).body(userEmployee);
+    }
 
-        @GetMapping("/name/{name}")
-        public ResponseEntity<List<UserEmployeeResponse>> getAllUserByName(@PathVariable String name, @PathVariable Integer id){
-            return ResponseEntity.ok(userEmployeeService.getAllByName (name));
-        }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserEmployeeResponse> getUserEmployee(@PathVariable Integer id) {
+        return ResponseEntity.ok(userEmployeeService.getUserEmployeeById(id));
+    }
 
-        @DeleteMapping("/{id}")
-        public void deleteUser(@PathVariable Integer id){
-            userEmployeeService.deleteUser(id);
-        }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserEmployeeResponse> getUserEmployeeByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(userEmployeeService.getUserEmployeeByEmail(email));
+    }
 
-        @PutMapping("/{id}")
-        public ResponseEntity<UserEmployeeResponse> updateUser(
-                @PathVariable Integer id,
-                @RequestBody UserEmployeeRequest userRequest
-    ){
-            return  ResponseEntity.ok(userEmployeeService.updateUser(id, userRequest));
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<UserEmployeeResponse>> getAllUserEmployeeByName(@PathVariable String name) {
+        return ResponseEntity.ok(userEmployeeService.getAllUserEmployeeByName(name));
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUserEmployee(@PathVariable Integer id) {
+        userEmployeeService.deleteUserEmployee(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserEmployeeResponse> updateUserEmployee(
+            @PathVariable Integer id,
+            @RequestBody UserEmployeeRequest userEmployeeRequest
+    ) {
+        UserEmployeeResponse updatedUserEmployee = userEmployeeService.updateUserEmployee(id, userEmployeeRequest);
+        return ResponseEntity.ok(updatedUserEmployee);
+    }
 }

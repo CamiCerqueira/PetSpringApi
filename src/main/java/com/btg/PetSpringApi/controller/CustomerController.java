@@ -15,13 +15,13 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/customer")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
 
     @RequestMapping
-    public ResponseEntity<Page<CustomerResponse>> getUsers(
+    public ResponseEntity<Page<CustomerResponse>> getCustomer(
             @RequestParam(
                     value = "page",
                     required = false,
@@ -40,43 +40,43 @@ public class CustomerController {
 
     ){
 
-        return ResponseEntity.ok(customerService.getUsers(page, size, direction));
+        return ResponseEntity.ok(customerService.getCustomer(page, size, direction));
     }
 
     @PostMapping
-    public ResponseEntity<CustomerResponse> saveUser(
-            @Valid @RequestBody CustomerRequest userDTO
+    public ResponseEntity<CustomerResponse> saveCustomer(
+            @Valid @RequestBody CustomerRequest customerDTO
     ) throws PasswordValidationError {
-        CustomerResponse user =  customerService.saveUser(userDTO);
-        return ResponseEntity.created(URI.create("/user/"+user.getId())).body(user);
+        CustomerResponse customer =  customerService.saveCustomer(customerDTO);
+        return ResponseEntity.created(URI.create("/customer/"+customer.getId())).body(customer);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerResponse> getUser(@PathVariable Integer id){
-        return ResponseEntity.ok(customerService.getUserById(id));
+    public ResponseEntity<CustomerResponse> getCustomer(@PathVariable Integer id){
+        return ResponseEntity.ok(customerService.getCustomerById(id));
     }
 
-    @GetMapping("/email/{email}")
-    public ResponseEntity<CustomerResponse> getUserByEmail(@PathVariable String email){
-        return  ResponseEntity.ok(customerService.getUserByEmail(email));
+    @GetMapping("/phoneNumber/{phoneNumber}")
+    public ResponseEntity<CustomerResponse> getCustomerByPhoneNumber(@PathVariable String phoneNumber){
+        return  ResponseEntity.ok(customerService.getCustomerByPhoneNumber(phoneNumber));
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<List<CustomerResponse>> getAllUserByName(@PathVariable String name, @PathVariable Integer id){
+    public ResponseEntity<List<CustomerResponse>> getAllCustomerByName(@PathVariable String name, @PathVariable Integer id){
         return ResponseEntity.ok(customerService.getAllByName(name));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Integer id){
-        customerService.deleteUser(id);
+    public void deleteCustomer(@PathVariable Integer id){
+        customerService.deleteCustomer(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerResponse> updateUser(
+    public ResponseEntity<CustomerResponse> updateCustomer(
             @PathVariable Integer id,
-            @RequestBody CustomerRequest userRequest
+            @RequestBody CustomerRequest customerRequest
     ){
-        return  ResponseEntity.ok(customerService.updateUser(id, userRequest));
+        return  ResponseEntity.ok(customerService.updateCustomer(id, customerRequest));
     }
 
 

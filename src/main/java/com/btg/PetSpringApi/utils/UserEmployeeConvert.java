@@ -25,27 +25,24 @@ public class UserEmployeeConvert {
         userEmployee.setName(userEmployee.getName());
         userEmployee.setEmail(userEmployee.getEmail());
 
-        return userEmployee;
+        return userEmployeeResponse;
 
     }
-
-    public static List<UserEmployee> toResponseList(List<UserEmployee> userEmployees){
+    public static List<UserEmployeeResponse> toResponseList(List<UserEmployee> userEmployees) {
         List<UserEmployeeResponse> userEmployeeResponses = new ArrayList<>();
         for (UserEmployee userEmployee : userEmployees) {
-            UserEmployeeResponse userEmployeeResponse = UserEmployeeRequest.toResponse(userEmployee);
-            userEmployeeResponse.add(userEmployeeResponse);
+            UserEmployeeResponse userEmployeeResponse = UserEmployeeConvert.toResponse(userEmployee);
+            userEmployeeResponses.add(userEmployeeResponse);
         }
-        return userEmployees;
-
+        return userEmployeeResponses;
     }
 
-    public static Page<UserEmployeeRequest> toResponsePage(Page<UserEmployee> userEmployees){
+    public static Page<UserEmployeeResponse> toResponsePage(Page<UserEmployee> userEmployees) {
         List<UserEmployeeResponse> userEmployeeResponses = new ArrayList<>();
-        for (UserEmployee userEmployee : userEmployees){
-            UserEmployeeResponse userEmployeeResponse = UserEmployeeRequest.toResponse(userEmployee);
-            userEmployeeResponse.add(userEmployeeResponse);
+        for (UserEmployee userEmployee : userEmployees) {
+            UserEmployeeResponse userEmployeeResponse = UserEmployeeConvert.toResponse(userEmployee);
+            userEmployeeResponses.add(userEmployeeResponse);
         }
-        return new PageImpl<>(userEmployees);
+        return new PageImpl<>(userEmployeeResponses);
     }
-
 }

@@ -29,22 +29,22 @@ public class CustomerConvert {
 
     }
 
-    public static List<CustomerResponse> toResponseList(List<Customer> customers){
+    public static List<CustomerResponse> toResponseList(List<Customer> customers) {
         List<CustomerResponse> customerResponses = new ArrayList<>();
         for (Customer customer : customers) {
             CustomerResponse customerResponse = CustomerConvert.toResponse(customer);
-            customerResponse.add(customerResponse);
+            customerResponses.add(customerResponse);
         }
         return customerResponses;
 
-        }
+    }
 
     public static Page<CustomerResponse> toResponsePage(Page<Customer> customers){
         List<CustomerResponse> customerResponses = new ArrayList<>();
         for (Customer customer : customers){
-            CustomerResponse customerResponse = CustomerConvert.toResponse(customers);
-            customerResponse.add(customerResponse);
-            }
+            CustomerResponse customerResponse = CustomerConvert.toResponse(customer);
+            customerResponses.add(customerResponse);
+        }
         return new PageImpl<>(customerResponses);
     }
 }

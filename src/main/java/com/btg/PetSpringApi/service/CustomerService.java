@@ -21,31 +21,31 @@ public class CustomerService {
     @Autowired
     ICustomer customerRepository;
 
-    public Page<CustomerResponse> getUsers(int page, int size, String direction){
+    public Page<CustomerResponse> getCustomer(int page, int size, String direction){
         PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(direction), "name");
         Page<Customer> customers = ICustomer.findAll(pageRequest);
         return CustomerConvert.toResponsePage(customers);
 
     }
 
-    public CustomerResponse saveUser(CustomerRequest userDTO) throws PasswordValidationError {
-        Customer customer = CustomerConvert.toEntity(userDTO);
+    public CustomerResponse saveCustomer(CustomerRequest customerDTO) throws PasswordValidationError {
+        Customer customer = CustomerConvert.toEntity(customerDTO);
         customer.setActive(true);
         if(!Validator.passwordValidate(customer.getPassword())) throw new PasswordValidationError("Senha deve seguir o padrao");
-        Customer userEntity = customerRepository.save(customer);
-        return CustomerConvert.toResponse(userEntity);
+        Customer CustomerEntity = customerRepository.save(customer);
+        return CustomerConvert.toResponse(CustomerEntity);
     }
 
-    public CustomerResponse getUserById(Integer id){
-        Optional<Customer> userResponse =  customerRepository.findById(id);
-        if(userResponse.isPresent()){
-            return CustomerConvert.toResponse(userResponse.get());
+    public CustomerResponse getCustomerById(Integer id){
+        Optional<Customer> customerResponse =  customerRepository.findById(id);
+        if(customerResponse.isPresent()){
+            return CustomerConvert.toResponse(customerResponse.get());
         } else {
             throw new RuntimeException("nao encontrado");
         }
     }
 
-    public CustomerResponse getUserByEmail(String phoneNumber){
+    public CustomerResponse getCustomerByPhoneNumber(String phoneNumber){
         return CustomerConvert.toResponse(customerRepository.findByPhoneNumber(phoneNumber).get());
     }
 
@@ -53,14 +53,14 @@ public class CustomerService {
         return CustomerConvert.toResponseList(customerRepository.findAllByName(name));
     }
 
-    public void deleteUser(Integer id){
+    public void deleteCustomer(Integer id){
         Customer customer = customerRepository.findById(id).orElseThrow();
         customer.setActive(false);
         customerRepository.save(customer);
     }
 
-    public CustomerResponse updateUser(Integer id, CustomerRequest userRequest){
-        Customer customer = CustomerConvert.toEntity(userRequest);
+    public CustomerResponse updateCustomer(Integer id, CustomerRequest customerRequest){
+        Customer customer = CustomerConvert.toEntity(customerRequest);
         customer.setId(id);
         return CustomerConvert.toResponse(customerRepository.save(customer));
     }
