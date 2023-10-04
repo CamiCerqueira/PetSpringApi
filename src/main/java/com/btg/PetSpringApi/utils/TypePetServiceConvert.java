@@ -2,6 +2,7 @@ package com.btg.PetSpringApi.utils;
 
 import com.btg.PetSpringApi.controller.dto.TypePetServiceRequest;
 import com.btg.PetSpringApi.controller.dto.TypePetServiceResponse;
+import com.btg.PetSpringApi.model.PetService;
 import com.btg.PetSpringApi.model.TypePetService;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class TypePetServiceConvert {
     }
 
 
-    public static List<TypePetServiceResponse> toResponseList(List<TypePetService> typePetServices) {
+    public static List<TypePetServiceResponse> toResponseList(List<PetService> typePetServices) {
         List<TypePetServiceResponse> typePetServiceResponses = new ArrayList<>();
         for (TypePetService typePetService : typePetServices) {
             typePetServiceResponses.add(toResponse(typePetService));
