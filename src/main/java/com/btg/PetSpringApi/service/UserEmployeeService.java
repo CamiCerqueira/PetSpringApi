@@ -13,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.swing.plaf.IconUIResource;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +23,7 @@ public class UserEmployeeService {
 
     public Page<UserEmployeeResponse> getUserEmployee(int page, int size, String direction){
         PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(direction), "name");
-        Page<UserEmployee> userEmployees = userEmployeeRepository.findAll(pageRequest);
+        Page<UserEmployee> userEmployees = userEmployeeRepository.findAllActiveUserEmployees(pageRequest);
         return UserEmployeeConvert.toResponsePage(userEmployees);
 
     }
@@ -37,16 +36,16 @@ public class UserEmployeeService {
         return UserEmployeeConvert.toResponse(userEmployeeEntity);
     }
 
-    public UserEmployeeResponse getUserById(Integer id){
-        Optional<UserEmployee> userResponse =  userEmployeeRepository.findById(id);
-        if(userResponse.isPresent()){
-            return UserEmployeeConvert.toResponse(userResponse.get());
+    public UserEmployeeResponse getUserEmployeeById(Integer id){
+        Optional<UserEmployee> userEmployeeResponse =  userEmployeeRepository.findById(id);
+        if(userEmployeeResponse.isPresent()){
+            return UserEmployeeConvert.toResponse(userEmployeeResponse.get());
         } else {
             throw new RuntimeException("nao encontrado");
         }
     }
 
-    public UserEmployeeResponse getUserByEmail(String email){
+    public UserEmployeeResponse getUserEmployeeByEmail(String email){
         return UserEmployeeConvert.toResponse(userEmployeeRepository.findByEmail(email).get());
     }
 
@@ -54,7 +53,7 @@ public class UserEmployeeService {
         return UserEmployeeConvert.toResponseList(userEmployeeRepository.findAllByName(name));
     }
 
-    public void deleteUser(Integer id) {
+    public void deleteUserEmployee(Integer id) {
         Optional<UserEmployee> userEmployeeOptional = userEmployeeRepository.findById(id);
 
         if (userEmployeeOptional.isPresent()) {
@@ -67,7 +66,7 @@ public class UserEmployeeService {
     }
 
 
-    public UserEmployeeResponse updateUser(Integer id, UserEmployeeRequest userRequest){
+    public UserEmployeeResponse updateUserEmployee(Integer id, UserEmployeeRequest userRequest){
         UserEmployee userEmployee = UserEmployeeConvert.toEntity(userRequest);
         userEmployee.setId(id);
         return UserEmployeeConvert.toResponse(userEmployeeRepository.save(userEmployee));

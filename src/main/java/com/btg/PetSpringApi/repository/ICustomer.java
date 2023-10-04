@@ -11,9 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICustomer extends JpaRepository<Customer, Integer> {
-    @Override
-    @Query (value =  "SELECT * FROM CUSTOMERS WHERE ACTIVE = TRUE",nativeQuery = true)
-    Page<Customer> findAll(Pageable pageable);
+    @Query (value =  "SELECT * FROM CUSTOMER WHERE ACTIVE = TRUE",nativeQuery = true)
+    Page<Customer> findAllActiveCustomers(Pageable pageable);
 
 
     Optional<Customer> findByPhoneNumber(String phoneNumber);

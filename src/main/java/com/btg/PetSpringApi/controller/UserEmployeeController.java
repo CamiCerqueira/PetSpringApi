@@ -46,7 +46,7 @@ public class UserEmployeeController {
 
     @GetMapping("/name/{name}")
     public ResponseEntity<List<UserEmployeeResponse>> getAllUserEmployeeByName(@PathVariable String name) {
-        return ResponseEntity.ok(userEmployeeService.getAllUserEmployeeByName(name));
+        return ResponseEntity.ok(userEmployeeService.getAllByName(name));
     }
 
     @DeleteMapping("/{id}")

@@ -23,7 +23,7 @@ public class CustomerService {
 
     public Page<CustomerResponse> getCustomer(int page, int size, String direction){
         PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(direction), "name");
-        Page<Customer> customers = ICustomer.findAll(pageRequest);
+        Page<Customer> customers = customerRepository.findAllActiveCustomers(pageRequest);
         return CustomerConvert.toResponsePage(customers);
 
     }

@@ -10,8 +10,6 @@ import java.util.List;
 
 public class ProductConvert {
 
-
-
     public static Product toEntity(ProductRequest productRequest, TypeProduct typeProduct){
         Product product = new Product();
         product.setName(productRequest.getName());

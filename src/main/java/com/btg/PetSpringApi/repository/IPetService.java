@@ -10,7 +10,7 @@ import java.util.List;
 public interface IPetService extends JpaRepository <PetService, Integer> {
 
     //Como criamos a TypePetService criei a query para buscar por Type.
-    @Query("SELECT p FROM Product p WHERE p.type.id = :type")
-    List<PetService> findProductByType(@Param("type") Integer typePetService);
+    @Query("SELECT p FROM PetService p WHERE p.type.id = :type")
+    List<PetService> findPetServiceByType(@Param("type") Integer typePetService);
 
 }
