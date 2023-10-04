@@ -27,6 +27,9 @@ public class OrderController {
     public ResponseEntity<List<OrderResponse>> getOrders(
             @RequestParam(name = "customerId", required = false) Integer customerId,
             @RequestParam(name = "productId", required = false) Integer productId
+           // @RequestParam(name = "mimValue", required = false) Double mimValue,
+           // @RequestParam(name = "maxValue", required = false)  Double maxValue,
+
     ) {
         return ResponseEntity.ok(orderService.getAllOrders(customerId, productId));
     }

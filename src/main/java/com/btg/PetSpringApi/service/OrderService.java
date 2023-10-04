@@ -50,10 +50,10 @@ public class OrderService {
         return OrderConvert.toResponse(orderRepository.save(order));
     }
 
-    public List<OrderResponse> getAllByPrice(double minPrice, double maxPrice) {
-        List<Order> orders = orderRepository.findAllByPrice(minPrice, maxPrice);
-        return OrderConvert.toResponseList(orders);
-    }
+   // public List<OrderResponse> getAllByPrice(double minPrice, double maxPrice) {
+     //   List<Order> orders = orderRepository.findAllByPrice(minPrice, maxPrice);
+      //  return OrderConvert.toResponseList(orders);
+    //}
 
 
     public List<OrderResponse> getAllByCustomer(Integer customerId){
@@ -64,7 +64,19 @@ public class OrderService {
         return OrderConvert.toResponseList(orderRepository.findAllByProduct(productId));
     }
 
-    public List<OrderResponse> getAllOrders(Integer customerId, Integer productId) {
+    public List<OrderResponse> getAllOrders(
+            Integer customerId,
+            Integer productId){
+            //Double minValue,
+            //Double masValue){
+
+        if( customerId!= null ) {
+            return getAllByCustomer(customerId);
+        } else if (productId != null ) {
+            return getAllByProduct(productId);
+        } else {
+            return OrderConvert.toResponseList(orderRepository.findAll());
+        }
     }
 
 
@@ -84,5 +96,4 @@ public class OrderService {
     //   List<Order> orders = query.from(qOrder).where(qOrder.totalPrice.between(minValue, maxValue)).fetch();
     //   return OrderConvert.toResponseList(orders);
     //  }
-}
 }
