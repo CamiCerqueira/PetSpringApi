@@ -13,4 +13,6 @@ public interface IPetService extends JpaRepository <PetService, Integer> {
     @Query("SELECT p FROM PetService p WHERE p.type.id = :type")
     List<PetService> findPetServiceByType(@Param("type") Integer typePetService);
 
+
+
 }

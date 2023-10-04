@@ -25,7 +25,7 @@ public class TypePetServiceConvert {
     }
 
 
-    public static List<TypePetServiceResponse> toResponseList(List<PetService> typePetServices) {
+    public static List<TypePetServiceResponse> toResponseList(List<TypePetService> typePetServices) {
         List<TypePetServiceResponse> typePetServiceResponses = new ArrayList<>();
         for (TypePetService typePetService : typePetServices) {
             typePetServiceResponses.add(toResponse(typePetService));

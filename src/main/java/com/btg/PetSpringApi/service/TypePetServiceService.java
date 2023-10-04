@@ -17,6 +17,7 @@ public class TypePetServiceService {
 
     public List<TypePetServiceResponse> getAllTypePetServices() {
         return TypePetServiceConvert.toResponseList(typePetServiceRepository.findAll());
+
     }
 
     public TypePetServiceResponse saveTypePetService(TypePetServiceRequest typePetServiceRequest) {

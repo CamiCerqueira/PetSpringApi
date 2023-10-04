@@ -2,6 +2,7 @@ package com.btg.PetSpringApi.controller;
 
 import com.btg.PetSpringApi.controller.dto.TypePetServiceRequest;
 import com.btg.PetSpringApi.controller.dto.TypePetServiceResponse;
+import com.btg.PetSpringApi.service.TypePetServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class TypePetServiceController {
 
     @GetMapping
     public ResponseEntity<List<TypePetServiceResponse>> getAllTypePetService() {
-        return ResponseEntity.ok(typePetServiceService.getAllTypePetService());
+        return ResponseEntity.ok(typePetServiceService.getAllTypePetServices());
     }
 
     @PostMapping
