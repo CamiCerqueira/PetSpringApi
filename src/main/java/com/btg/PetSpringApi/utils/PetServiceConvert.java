@@ -17,15 +17,17 @@ public class PetServiceConvert {
         return petService;
 
     }
+
+
     public static PetServiceResponse toResponse(PetService petService) {
         PetServiceResponse petServiceResponse = new PetServiceResponse();
         petServiceResponse.setId(petService.getId());
         petServiceResponse.setName(petService.getName());
         petServiceResponse.setPrice(petService.getPrice());
-        petServiceResponse.setType(TypePetServiceConvert.toResponse(petService.getType()));
+        petServiceResponse.setType(petService.getType()); //typePetServiceConvert não atribuiu
         return petServiceResponse;
-
     }
+
 
     public static List<PetServiceResponse> toResponseList(List<PetService> petsServices) {
         List<PetServiceResponse> petServiceResponses = new ArrayList<>();

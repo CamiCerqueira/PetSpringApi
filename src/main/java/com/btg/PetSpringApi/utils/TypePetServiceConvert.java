@@ -15,19 +15,20 @@ public class TypePetServiceConvert {
         return typePetService;
     }
 
-    public static TypePetServiceResponse toResponse (TypePetService typePetService) {
+
+    public static TypePetServiceResponse toResponse(TypePetService typePetService) {
         TypePetServiceResponse typePetServiceResponse = new TypePetServiceResponse();
-        typePetServiceResponse.setId(typePetServiceResponse.getId());
-        typePetServiceResponse.setName(typePetServiceResponse.getName());
+        typePetServiceResponse.setId(typePetService.getId());
+        typePetServiceResponse.setName(typePetService.getName());
         return typePetServiceResponse;
     }
 
-    public static List<TypePetServiceResponse> toResponseList (List<TypePetService> typesPetServices){
-       List<TypePetServiceResponse> typePetServiceResponses =  new ArrayList<>();
-       for(TypePetService typePetService : typesPetServices) {
-           typePetServiceResponses.add(toResponse(typePetService));
-       }
-       return typePetServiceResponses;
 
-       }
+    public static List<TypePetServiceResponse> toResponseList(List<TypePetService> typePetServices) {
+        List<TypePetServiceResponse> typePetServiceResponses = new ArrayList<>();
+        for (TypePetService typePetService : typePetServices) {
+            typePetServiceResponses.add(toResponse(typePetService));
+        }
+        return typePetServiceResponses;
     }
+}

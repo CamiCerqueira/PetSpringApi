@@ -19,11 +19,14 @@ public class PetServiceService {
     @Autowired
     ITypePetService typePetServiceRepository;
 
+
     public PetServiceResponse savePetService(PetServiceRequest petServiceRequest) {
-        TypePetService typePetService = typePetServiceRepository.findById(petServiceRequest.getTypeId()).get().getType();
+        TypePetService typePetService = typePetServiceRepository.findById(petServiceRequest.getTypeId()).orElse(null).getType();
         PetService petService = PetServiceConvert.toEntity(petServiceRequest, typePetService);
         return PetServiceConvert.toResponse(petServiceRepository.save(petService));
     }
+
+
     public List<PetServiceResponse> getAllPetService(Integer typePetService) {
         if (typePetService != null) {
             return getAllByTypePetService(typePetService);
@@ -36,3 +39,4 @@ public class PetServiceService {
     }
 
 }
+
