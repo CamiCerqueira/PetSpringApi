@@ -7,6 +7,6 @@ import java.util.List;
 @Getter
 public class OrderRequest {
     private Double totalPrice;
-    private Integer userId;
+    private Integer customerId;
     private List<Integer> productsIds;
 }

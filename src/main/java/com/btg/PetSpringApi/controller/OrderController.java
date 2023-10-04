@@ -2,6 +2,7 @@ package com.btg.PetSpringApi.controller;
 
 import com.btg.PetSpringApi.controller.dto.OrderRequest;
 import com.btg.PetSpringApi.controller.dto.OrderResponse;
+import com.btg.PetSpringApi.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,17 +19,15 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<OrderResponse> saveOrder(@RequestBody OrderRequest orderRequest) {
-        OrderResponse orderReponse = orderService.saveOrder(orderRequest);
-        return ResponseEntity.created(URI.create("/order/" + orderReponse.getId())).body(orderReponse);
+        OrderResponse orderResponse = orderService.saveOrder(orderRequest);
+        return ResponseEntity.created(URI.create("/order/" + orderResponse.getId())).body(orderResponse);
     }
-
 
     @GetMapping
-    public ResponseEntity<List<OrderResponse>> getOrder((
-       @RequestParam(name = "userId", required = false) Integer userId,
-       @RequestParam(name = "productId", required = false) Integer productId
-    ){
-        return ResponseEntity.ok(orderService.getAllOrders(userId, productId));
+    public ResponseEntity<List<OrderResponse>> getOrders(
+            @RequestParam(name = "customerId", required = false) Integer customerId,
+            @RequestParam(name = "productId", required = false) Integer productId
+    ) {
+        return ResponseEntity.ok(orderService.getAllOrders(customerId, productId));
     }
-
 }
