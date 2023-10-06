@@ -5,12 +5,18 @@ import com.btg.PetSpringApi.controller.dto.OrderResponse;
 import com.btg.PetSpringApi.model.Customer;
 import com.btg.PetSpringApi.model.Order;
 import com.btg.PetSpringApi.model.Product;
+import com.btg.PetSpringApi.model.QOrder;
 import com.btg.PetSpringApi.repository.ICustomer;
 import com.btg.PetSpringApi.repository.IOrder;
 import com.btg.PetSpringApi.repository.IProduct;
 import com.btg.PetSpringApi.utils.OrderConvert;
+import com.querydsl.jpa.impl.JPAQuery;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import com.querydsl.core.types.Predicate;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +35,8 @@ public class OrderService {
     @Autowired
     IProduct productRepository;
 
-    //  @Autowired
-    // EntityManager entityManager;
+      @Autowired
+      EntityManager entityManager;
 
     public OrderResponse saveOrder(OrderRequest orderRequest){
         Customer customer = customerRepository.findById(orderRequest.getCustomerId()).get();
@@ -64,36 +70,21 @@ public class OrderService {
         return OrderConvert.toResponseList(orderRepository.findAllByProduct(productId));
     }
 
-    public List<OrderResponse> getAllOrders(
-            Integer customerId,
-            Integer productId){
-            //Double minValue,
-            //Double masValue){
+    public Page<OrderResponse> getAllOrders(
+           Predicate predicate,
+           Pageable pageable
+            ){
 
-        if( customerId!= null ) {
-            return getAllByCustomer(customerId);
-        } else if (productId != null ) {
-            return getAllByProduct(productId);
-        } else {
-            return OrderConvert.toResponseList(orderRepository.findAll());
-        }
-    }
+       Page<Order> orders = orderRepository.findAll(predicate, pageable);
 
+      return OrderConvert.toResponsePage(orders);
+      }
 
-    //  public Page<OrderResponse> getAllOrders(
-    //  Predicate predicate,
-    // Pageable pageable
-    // ){
-    //   Page<Order> orders = orderRepository.findAll(predicate, pageable);
+    public List<OrderResponse> getAllByPrice(Double minValue, Double maxValue){
+       JPAQuery<Order> query = new JPAQuery<>(entityManager);
+       QOrder qOrder = QOrder.order;
 
-    //  return OrderConvert.toResponsePage(orders);
-    //  }
-
-    // public List<OrderResponse> getAllByPrice(Double minValue, Double maxValue){
-    //   JPAQuery<Order> query = new JPAQuery<>(entityManager);
-    //  QOrder qOrder = QOrder.order;
-
-    //   List<Order> orders = query.from(qOrder).where(qOrder.totalPrice.between(minValue, maxValue)).fetch();
-    //   return OrderConvert.toResponseList(orders);
-    //  }
+       List<Order> orders = query.from(qOrder).where(qOrder.totalPrice.between(minValue, maxValue)).fetch();
+       return OrderConvert.toResponseList(orders);
+      }
 }

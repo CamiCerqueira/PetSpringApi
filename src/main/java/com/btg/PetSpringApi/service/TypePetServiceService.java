@@ -21,7 +21,8 @@ public class TypePetServiceService {
     }
 
     public TypePetServiceResponse saveTypePetService(TypePetServiceRequest typePetServiceRequest) {
-        TypePetService typePetService = typePetServiceRepository.save(TypePetServiceConvert.toEntity(typePetServiceRequest));
+        TypePetService typePetService;
+        typePetService = typePetServiceRepository.save(TypePetServiceConvert.toEntity(typePetServiceRequest));
         return TypePetServiceConvert.toResponse(typePetService);
     }
 

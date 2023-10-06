@@ -3,10 +3,12 @@ package com.btg.PetSpringApi.service;
 import com.btg.PetSpringApi.controller.dto.UserEmployeeRequest;
 import com.btg.PetSpringApi.controller.dto.UserEmployeeResponse;
 import com.btg.PetSpringApi.controller.exception.PasswordValidationError;
+import com.btg.PetSpringApi.model.QUserEmployee;
 import com.btg.PetSpringApi.model.UserEmployee;
 import com.btg.PetSpringApi.repository.IUserEmployee;
 import com.btg.PetSpringApi.utils.UserEmployeeConvert;
 import com.btg.PetSpringApi.utils.Validator;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -46,10 +48,14 @@ public class UserEmployeeService {
     }
 
     public UserEmployeeResponse getUserEmployeeByEmail(String email){
-        return UserEmployeeConvert.toResponse(userEmployeeRepository.findByEmail(email).get());
+        QUserEmployee qUserEmployee = QUserEmployee.userEmployee;
+
+        BooleanExpression booleanExpression = qUserEmployee.email.eq(qUserEmployee.email);
+        return UserEmployeeConvert.toResponse(userEmployeeRepository.findOne(booleanExpression).get());
     }
 
     public List<UserEmployeeResponse> getAllByName(String name){
+
         return UserEmployeeConvert.toResponseList(userEmployeeRepository.findAllByName(name));
     }
 

@@ -45,8 +45,8 @@ public class CustomerService {
         }
     }
 
-    public CustomerResponse getCustomerByEmail(String email){
-        return CustomerConvert.toResponse(customerRepository.findByEmail(email).get());
+    public CustomerResponse getCustomerByPhoneNumber(String phoneNumber){
+        return CustomerConvert.toResponse(customerRepository.findByPhoneNumber(phoneNumber).get());
     }
 
     public List<CustomerResponse> getAllByName(String name){

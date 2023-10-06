@@ -5,6 +5,8 @@ import com.btg.PetSpringApi.controller.dto.OrderResponse;
 import com.btg.PetSpringApi.model.Customer;
 import com.btg.PetSpringApi.model.Order;
 import com.btg.PetSpringApi.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,5 +37,14 @@ public class OrderConvert {
         }
 
         return orderResponse;
+    }
+
+    public static Page<OrderResponse> toResponsePage(Page<Order> orders) {
+        List<OrderResponse> orderResponses = new ArrayList<>();
+        for (Order order : orders) {
+            OrderResponse orderResponse = OrderConvert.toResponse(order);
+            orderResponses.add(orderResponse);
+        }
+        return new PageImpl<>(orderResponses);
     }
 }

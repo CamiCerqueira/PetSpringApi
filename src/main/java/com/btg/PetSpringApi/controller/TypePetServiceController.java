@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TypePetServiceController {
     @Autowired
-    TypePetServiceService typePetServiceService;  // Corrija para o serviço apropriado
+    TypePetServiceService typePetServiceService;
 
     @GetMapping
     public ResponseEntity<List<TypePetServiceResponse>> getAllTypePetService() {

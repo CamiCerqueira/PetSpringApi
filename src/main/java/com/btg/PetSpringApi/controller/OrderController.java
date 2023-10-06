@@ -2,8 +2,13 @@ package com.btg.PetSpringApi.controller;
 
 import com.btg.PetSpringApi.controller.dto.OrderRequest;
 import com.btg.PetSpringApi.controller.dto.OrderResponse;
+import com.btg.PetSpringApi.model.Order;
 import com.btg.PetSpringApi.service.OrderService;
+import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,13 +29,11 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderResponse>> getOrders(
-            @RequestParam(name = "customerId", required = false) Integer customerId,
-            @RequestParam(name = "productId", required = false) Integer productId
-           // @RequestParam(name = "mimValue", required = false) Double mimValue,
-           // @RequestParam(name = "maxValue", required = false)  Double maxValue,
+    public ResponseEntity<Page<OrderResponse>> getOrder(
+            @QuerydslPredicate(root = Order.class)Predicate predicate,
+            Pageable pageable
 
-    ) {
-        return ResponseEntity.ok(orderService.getAllOrders(customerId, productId));
+            ){
+        return ResponseEntity.ok(orderService.getAllOrders(predicate, pageable));
     }
 }
