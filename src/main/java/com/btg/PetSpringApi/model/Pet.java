@@ -4,14 +4,16 @@ package com.btg.PetSpringApi.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
 @Entity
 @Table (name = "pet")
-
-
+@Where(clause = "active is true")
 public class Pet {
 
     @Id
@@ -29,5 +31,7 @@ public class Pet {
 
     @Column (name = "breed", nullable = false)
     private String breed;
+
+    private Boolean active;
 
 }

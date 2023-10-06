@@ -15,7 +15,7 @@ public class CustomerConvert {
     public static Customer toEntity(CustomerRequest customerDTO) {
         Customer customer = new Customer();
         customer.setName(customerDTO.getName());
-        customer.setPhoneNumber(customerDTO.getPhoneNumber());
+        customer.setEmail(customerDTO.getEmail());
         return customer;
     }
 
@@ -23,7 +23,7 @@ public class CustomerConvert {
         CustomerResponse customerResponse = new CustomerResponse();
         customerResponse.setId(customer.getId());
         customerResponse.setName(customer.getName());
-        customerResponse.setPhoneNumber(customer.getPhoneNumber());
+        customerResponse.setEmail(customer.getEmail());
 
         return customerResponse;
 

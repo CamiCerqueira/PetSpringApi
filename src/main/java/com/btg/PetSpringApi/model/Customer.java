@@ -15,6 +15,7 @@ import org.hibernate.annotations.Where;
 @Table (name="customer")
 @Where(clause = "active is true")
 public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -25,8 +26,8 @@ public class Customer {
     @Column (name = "pet", nullable = false)
     private String pet;
 
-    @Column (name = "phoneNumber", nullable = false)
-    private String phoneNumber;
+    @Column (name = "email", nullable = false)
+    private String email;
     private Boolean active;
 
     @Column(name = "password",nullable = false)
