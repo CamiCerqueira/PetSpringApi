@@ -12,6 +12,8 @@ public class UserEmployeeRequest {
     @NotBlank()
     @Length(min = 3, max = 35)
     private String name;
+    
+    private String occupation;
     @Email
     private String email;
 

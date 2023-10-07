@@ -1,6 +1,7 @@
 package com.btg.PetSpringApi.InfraSecurity;
 
 import com.btg.PetSpringApi.repository.ICustomer;
+import com.btg.PetSpringApi.repository.IUserEmployee;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Autowired
     ICustomer customerRepository;
+    //IUserEmployee userEmployeeRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -43,9 +45,13 @@ public class SecurityFilter extends OncePerRequestFilter {
         return token.substring(7);
     }
 
-    private void authenticate(String subject){
+    private void authenticate(String subject) {
         UserDetails customer = customerRepository.findByEmail(subject);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(customer, null,customer.getAuthorities());
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(customer, null, customer.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+       // UserDetails userEmployee = userEmployeeRepository.findByEmail(subject);
+       // UsernamePasswordAuthenticationToken authenticationTokenUserEmployee = new UsernamePasswordAuthenticationToken(userEmployee, null, userEmployee.getAuthorities());
+       // SecurityContextHolder.getContext().setAuthentication(authenticationToken);
     }
 }
