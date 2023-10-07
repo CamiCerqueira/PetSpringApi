@@ -5,7 +5,6 @@ import com.btg.PetSpringApi.controller.dto.CustomerResponse;
 import com.btg.PetSpringApi.model.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +15,9 @@ public class CustomerConvert {
         Customer customer = new Customer();
         customer.setName(customerDTO.getName());
         customer.setEmail(customerDTO.getEmail());
+        customer.setPet(customerDTO.getPet());
+        customer.setPassword(customerDTO.getPassword());
+        customer.setActive(true);
         return customer;
     }
 
@@ -24,6 +26,7 @@ public class CustomerConvert {
         customerResponse.setId(customer.getId());
         customerResponse.setName(customer.getName());
         customerResponse.setEmail(customer.getEmail());
+        customerResponse.setPet(customer.getPet());
 
         return customerResponse;
 

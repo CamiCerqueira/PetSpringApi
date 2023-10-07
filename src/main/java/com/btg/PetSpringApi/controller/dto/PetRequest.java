@@ -21,5 +21,9 @@ public class PetRequest {
 
     private String breed;
 
+    private Double age;
+
+    private Double weight;
+
     //private String password;
 }

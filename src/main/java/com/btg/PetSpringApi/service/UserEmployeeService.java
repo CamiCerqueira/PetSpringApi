@@ -49,7 +49,6 @@ public class UserEmployeeService {
 
     public UserEmployeeResponse getUserEmployeeByEmail(String email){
         QUserEmployee qUserEmployee = QUserEmployee.userEmployee;
-
         BooleanExpression booleanExpression = qUserEmployee.email.eq(qUserEmployee.email);
         return UserEmployeeConvert.toResponse(userEmployeeRepository.findOne(booleanExpression).get());
     }

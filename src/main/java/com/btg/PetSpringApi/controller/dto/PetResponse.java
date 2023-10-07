@@ -8,5 +8,7 @@ public class PetResponse {
     private Integer id;
     private String name;
     private String breed;
+    private Double age;
+    private Double weight;
 
 }

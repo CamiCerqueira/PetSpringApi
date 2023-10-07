@@ -2,10 +2,8 @@ package com.btg.PetSpringApi.service;
 
 import com.btg.PetSpringApi.controller.dto.OrderRequest;
 import com.btg.PetSpringApi.controller.dto.OrderResponse;
-import com.btg.PetSpringApi.model.Customer;
-import com.btg.PetSpringApi.model.Order;
-import com.btg.PetSpringApi.model.Product;
-import com.btg.PetSpringApi.model.QOrder;
+import com.btg.PetSpringApi.model.*;
+import com.btg.PetSpringApi.model.PetService;
 import com.btg.PetSpringApi.repository.ICustomer;
 import com.btg.PetSpringApi.repository.IOrder;
 import com.btg.PetSpringApi.repository.IProduct;
@@ -43,14 +41,16 @@ public class OrderService {
 
         List<Product> products = new ArrayList<>();
 
-        List<Integer> productsId = orderRequest.getProductsIds();
+        List<Product> productsIds = orderRequest.getProducts();
+        List<PetService> petService = orderRequest.getPetServices();
 
-        for(Integer id: productsId){
-            Product product = productRepository.findById(id).get();
-            products.add(product);
+        for(Product product: products){
+            Product getproduct = productRepository.findById(product.getId()).get();
+            products.add(getproduct);
         }
 
-        Order order = OrderConvert.toEntity(orderRequest, customer, products);
+
+        Order order = OrderConvert.toEntity(orderRequest, customer, products, petService);
 
 
         return OrderConvert.toResponse(orderRepository.save(order));

@@ -1,5 +1,6 @@
 package com.btg.PetSpringApi.controller;
 
+import com.btg.PetSpringApi.InfraSecurity.TokenService;
 import com.btg.PetSpringApi.controller.dto.LoginRequest;
 import com.btg.PetSpringApi.controller.dto.TokenResponse;
 import com.btg.PetSpringApi.model.Customer;
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.token.TokenService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

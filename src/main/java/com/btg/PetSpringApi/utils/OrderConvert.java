@@ -4,6 +4,7 @@ import com.btg.PetSpringApi.controller.dto.OrderRequest;
 import com.btg.PetSpringApi.controller.dto.OrderResponse;
 import com.btg.PetSpringApi.model.Customer;
 import com.btg.PetSpringApi.model.Order;
+import com.btg.PetSpringApi.model.PetService;
 import com.btg.PetSpringApi.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -13,13 +14,15 @@ import java.util.List;
 
 public class OrderConvert {
 
-    public static Order toEntity(OrderRequest orderRequest, Customer customer, List<Product> products){
+    public static Order toEntity(OrderRequest orderRequest, Customer customer, List<Product> productsIds, List<PetService> petServices){
         Order order = new Order();
         order.setTotalPrice(orderRequest.getTotalPrice());
         order.setCustomer(customer);
-        order.setProducts(products);
+        order.setProducts(productsIds);
+        order.setPetServices(petServices);
         return order;
     }
+
 
     public static OrderResponse toResponse(Order order) {
         OrderResponse orderResponse = new OrderResponse();

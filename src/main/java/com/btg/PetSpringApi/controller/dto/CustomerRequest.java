@@ -18,4 +18,6 @@ public class CustomerRequest {
 
     private String password;
 
+    private String pet;
+
 }

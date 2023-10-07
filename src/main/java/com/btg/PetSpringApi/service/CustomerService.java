@@ -4,9 +4,11 @@ import com.btg.PetSpringApi.controller.dto.CustomerRequest;
 import com.btg.PetSpringApi.controller.dto.CustomerResponse;
 import com.btg.PetSpringApi.controller.exception.PasswordValidationError;
 import com.btg.PetSpringApi.model.Customer;
+import com.btg.PetSpringApi.model.QCustomer;
 import com.btg.PetSpringApi.repository.ICustomer;
 import com.btg.PetSpringApi.utils.CustomerConvert;
 import com.btg.PetSpringApi.utils.Validator;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -52,7 +54,13 @@ public class CustomerService {
     }
 
     public CustomerResponse getCustomerByEmail(String email){
-        return CustomerConvert.toResponse(customerRepository.findByEmail(email).get());
+        Customer customer = (Customer) customerRepository.findByEmail(email);
+       return CustomerConvert.toResponse(customer);
+
+        //public CustomerResponse getCustomerByEmail(String email){
+          //  QCustomer qCustomer = QCustomer.customer;
+            //BooleanExpression booleanExpression= qCustomer.email.eq(qCustomer.email);
+//return CustomerConvert.toResponse(Customer.findOne(booleanExpression).get());
     }
 
     public List<CustomerResponse> getAllByName(String name){

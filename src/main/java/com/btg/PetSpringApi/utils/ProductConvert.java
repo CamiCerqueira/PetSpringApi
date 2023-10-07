@@ -29,9 +29,9 @@ public class ProductConvert {
 
     }
 
-    public static List<ProductResponse> toResponseList(List<Product> products) {
+    public static List<ProductResponse> toResponseList(List<Product> productsId) {
         List<ProductResponse> productResponses = new ArrayList<>();
-        for (Product product : products) {
+        for (Product product : productsId) {
             productResponses.add(toResponse(product));
         }
         return productResponses;

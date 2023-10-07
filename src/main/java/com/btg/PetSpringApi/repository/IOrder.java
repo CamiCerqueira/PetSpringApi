@@ -17,7 +17,7 @@ public interface IOrder extends JpaRepository<Order, Integer>, QuerydslPredicate
     @Query(value = "SELECT order FROM Order order JOIN order.products product WHERE product.id = :productId")
     List<Order> findAllByProduct(Integer productId);
 
-    @Query("SELECT o FROM Order o WHERE o.price >= :minPrice AND o.price <= :maxPrice")
+    @Query("SELECT o FROM Order o WHERE o.totalPrice>= :minPrice AND o.totalPrice <= :maxPrice")
     List<Order> findAllByPrice(double minPrice, double maxPrice);
 
 }
