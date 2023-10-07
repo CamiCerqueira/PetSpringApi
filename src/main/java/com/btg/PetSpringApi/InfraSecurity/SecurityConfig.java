@@ -34,14 +34,13 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                //.authorizeHttpRequests((requests) -> requests
-                        //.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/")).permitAll()
-                       // .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/customer")).permitAll()
-                       // .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/userEmployee")).permitAll()
-                        //.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/login")).permitAll()//
-                        //.requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/user")).hasRole("ADMIN")
-                        //.anyRequest().authenticated())
-                //.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/customer")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/login")).permitAll()//
+                        .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/customer")).hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
     @Bean

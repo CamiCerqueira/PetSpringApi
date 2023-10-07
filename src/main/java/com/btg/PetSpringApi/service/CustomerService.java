@@ -23,11 +23,8 @@ import java.util.Optional;
 public class CustomerService {
     @Autowired
     ICustomer customerRepository;
-
     @Autowired
     PasswordEncoder passwordEncoder;
-
-
 
     public Page<CustomerResponse> getCustomer(int page, int size, String direction){
         PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(direction), "name");
@@ -39,6 +36,8 @@ public class CustomerService {
     public CustomerResponse saveCustomer(CustomerRequest customerDTO) throws PasswordValidationError {
         Customer customer = CustomerConvert.toEntity(customerDTO);
         customer.setActive(true);
+        String encodePassword = passwordEncoder.encode(customer.getPassword());
+        customer.setPassword(encodePassword);
         if(!Validator.passwordValidate(customer.getPassword())) throw new PasswordValidationError("Senha deve seguir o padrao");
         Customer CustomerEntity = customerRepository.save(customer);
         return CustomerConvert.toResponse(CustomerEntity);
@@ -58,9 +57,9 @@ public class CustomerService {
        return CustomerConvert.toResponse(customer);
 
         //public CustomerResponse getCustomerByEmail(String email){
-          //  QCustomer qCustomer = QCustomer.customer;
-            //BooleanExpression booleanExpression= qCustomer.email.eq(qCustomer.email);
-//return CustomerConvert.toResponse(Customer.findOne(booleanExpression).get());
+        //QCustomer qCustomer = QCustomer.customer;
+        //BooleanExpression booleanExpression= qCustomer.email.eq(qCustomer.email);
+        //return CustomerConvert.toResponse(Customer.findOne(booleanExpression).get());
     }
 
     public List<CustomerResponse> getAllByName(String name){
