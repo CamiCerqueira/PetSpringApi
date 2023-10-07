@@ -21,8 +21,7 @@ public class TypeProductService {
     }
 
     public TypeProductResponse saveTypeProduct(TypeProductRequest typeProductRequest){
-        TypeProduct typeProduct = typeProductRepository.save(
-                TypeProductConvert.toEntity(typeProductRequest)
+        TypeProduct typeProduct = typeProductRepository.save(TypeProductConvert.toEntity(typeProductRequest)
         );
         return TypeProductConvert.toResponse(typeProduct);
     }

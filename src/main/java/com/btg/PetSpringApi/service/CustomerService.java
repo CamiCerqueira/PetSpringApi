@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,11 @@ import java.util.Optional;
 public class CustomerService {
     @Autowired
     ICustomer customerRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+
 
     public Page<CustomerResponse> getCustomer(int page, int size, String direction){
         PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(direction), "name");
@@ -45,8 +51,8 @@ public class CustomerService {
         }
     }
 
-    public CustomerResponse getCustomerByPhoneNumber(String phoneNumber){
-        return CustomerConvert.toResponse(customerRepository.findByPhoneNumber(phoneNumber).get());
+    public CustomerResponse getCustomerByEmail(String email){
+        return CustomerConvert.toResponse(customerRepository.findByEmail(email).get());
     }
 
     public List<CustomerResponse> getAllByName(String name){

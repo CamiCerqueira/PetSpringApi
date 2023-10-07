@@ -21,7 +21,7 @@ public class PetServiceService {
 
 
     public PetServiceResponse savePetService(PetServiceRequest petServiceRequest) {
-        TypePetService typePetService = typePetServiceRepository.findById(petServiceRequest.getTypeId()).get();
+        TypePetService typePetService = typePetServiceRepository.findById(petServiceRequest.getTypeId()).get().getType();
         PetService petService = PetServiceConvert.toEntity(petServiceRequest, typePetService);
         return PetServiceConvert.toResponse(petServiceRepository.save(petService));
     }
