@@ -6,8 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-
-@Setter @Getter
+@Getter
 @AllArgsConstructor
 public class CustomerRequest {
     @NotBlank()

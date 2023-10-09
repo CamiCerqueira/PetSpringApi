@@ -8,12 +8,10 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.btg.PetSpringApi.model.Customer;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-import static com.btg.PetSpringApi.model.QCustomer.customer;
 
 @Service
 public class TokenService {

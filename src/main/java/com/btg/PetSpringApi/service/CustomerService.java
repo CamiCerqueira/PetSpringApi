@@ -4,11 +4,9 @@ import com.btg.PetSpringApi.controller.dto.CustomerRequest;
 import com.btg.PetSpringApi.controller.dto.CustomerResponse;
 import com.btg.PetSpringApi.controller.exception.PasswordValidationError;
 import com.btg.PetSpringApi.model.Customer;
-import com.btg.PetSpringApi.model.QCustomer;
 import com.btg.PetSpringApi.repository.ICustomer;
 import com.btg.PetSpringApi.utils.CustomerConvert;
 import com.btg.PetSpringApi.utils.Validator;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -67,7 +66,8 @@ public class CustomerService {
     }
 
     public void deleteCustomer(Integer id){
-        Customer customer = customerRepository.findById(id).orElseThrow();
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Cliente não encontrado"));
         customer.setActive(false);
         customerRepository.save(customer);
     }

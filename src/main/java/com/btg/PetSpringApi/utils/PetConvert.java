@@ -13,17 +13,31 @@ import java.util.List;
 public class PetConvert {
 
 
-    public static Pet toEntity(PetRequest petDTO) {
-        Pet pet = new Pet();
-        pet.setName(petDTO.getName());
-        pet.setBreed(petDTO.getBreed());
-        return pet;
-    }
+//    public static Pet toEntity(PetRequest petRequest) {
+//        Pet pet = new Pet();
+//        pet.setName(petRequest.getName());
+//        pet.setBreed(petRequest.getBreed());
+//        pet.setAge(petRequest.getAge());
+//        pet.setWeight(petRequest.getWeight());
+//        return pet;
+//    }
+public static Pet toEntity(PetRequest petDTO) {
+    Pet pet = new Pet();
+    pet.setName(petDTO.getName());
+    pet.setBreed(petDTO.getBreed());
+    pet.setAge(petDTO.getAge());
+    pet.setWeight(petDTO.getWeight());
+
+    return pet;
+}
 
     public static PetResponse toResponse(Pet pet){
         PetResponse petResponse = new PetResponse();
         petResponse.setId(pet.getId());
         petResponse.setName(pet.getName());
+        petResponse.setBreed(pet.getBreed());
+        petResponse.setAge(pet.getAge());
+        petResponse.setWeight(pet.getWeight());
         return petResponse;
 
     }

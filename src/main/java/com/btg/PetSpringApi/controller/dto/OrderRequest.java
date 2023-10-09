@@ -6,16 +6,17 @@ import com.btg.PetSpringApi.model.Product;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
-@Getter
+@Getter @Setter
 public class OrderRequest {
 
     private Double totalPrice;
     private Integer customerId;
-    private List<Product> products;
-    private List<PetService> petServices;
+    private List<Integer> productId;
+    private List<Integer> petServicesId;
 
 }
 

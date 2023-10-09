@@ -10,5 +10,4 @@ public class PetResponse {
     private String breed;
     private Double age;
     private Double weight;
-
 }

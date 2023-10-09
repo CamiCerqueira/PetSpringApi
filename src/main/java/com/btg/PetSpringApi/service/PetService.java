@@ -4,6 +4,7 @@ package com.btg.PetSpringApi.service;
 import com.btg.PetSpringApi.controller.dto.PetRequest;
 import com.btg.PetSpringApi.controller.dto.PetResponse;
 import com.btg.PetSpringApi.model.Pet;
+import com.btg.PetSpringApi.repository.ICustomer;
 import com.btg.PetSpringApi.repository.IPet;
 import com.btg.PetSpringApi.utils.PetConvert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class PetService {
 

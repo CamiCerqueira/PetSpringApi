@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/order")
@@ -23,17 +22,16 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<OrderResponse> saveOrder(@RequestBody OrderRequest orderRequest) {
-        OrderResponse orderResponse = orderService.saveOrder(orderRequest);
-        return ResponseEntity.created(URI.create("/order/" + orderResponse.getId())).body(orderResponse);
-    }
+    public ResponseEntity<Order> saveOrder(@RequestBody OrderRequest orderRequest) {
+        Order orderResponse = orderService.saveOrder(orderRequest);
+        return ResponseEntity.created(URI.create("/order/" + orderResponse.getId())).body(orderResponse);}
 
     @GetMapping
-    public ResponseEntity<Page<OrderResponse>> getOrder(
-            @QuerydslPredicate(root = Order.class)Predicate predicate,
+    public ResponseEntity<Page<OrderResponse>> getAllOrders (
+            @QuerydslPredicate(root = Order.class) Predicate predicate,
             Pageable pageable
 
-            ){
+    ){
         return ResponseEntity.ok(orderService.getAllOrders(predicate, pageable));
     }
 }

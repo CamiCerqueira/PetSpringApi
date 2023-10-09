@@ -51,6 +51,8 @@ public class CustomerController {
         return ResponseEntity.created(URI.create("/customer/"+customer.getId())).body(customer);
     }
 
+
+
     @GetMapping("/{id}")
     public ResponseEntity<CustomerResponse> getCustomer(@PathVariable Integer id){
         return ResponseEntity.ok(customerService.getCustomerById(id));

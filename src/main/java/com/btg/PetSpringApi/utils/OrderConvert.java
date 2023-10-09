@@ -14,11 +14,11 @@ import java.util.List;
 
 public class OrderConvert {
 
-    public static Order toEntity(OrderRequest orderRequest, Customer customer, List<Product> productsIds, List<PetService> petServices){
+    public static Order toEntity(OrderRequest orderRequest, Customer customer, List<Product> products, List<PetService> petServices){
         Order order = new Order();
         order.setTotalPrice(orderRequest.getTotalPrice());
-        order.setCustomer(customer);
-        order.setProducts(productsIds);
+        order.setCustomerId(customer);
+        order.setProducts(products);
         order.setPetServices(petServices);
         return order;
     }
@@ -27,8 +27,9 @@ public class OrderConvert {
     public static OrderResponse toResponse(Order order) {
         OrderResponse orderResponse = new OrderResponse();
         orderResponse.setId(order.getId());
-        orderResponse.setCustomer(order.getCustomer());
-        orderResponse.setProducts(order.getProducts());
+        orderResponse.setCustomer(order.getCustomerId());
+        orderResponse.setProductId(order.getProducts());
+        orderResponse.setPetServiceId(order.getPetServices());
         orderResponse.setTotalPrice(order.getTotalPrice());
 
         return orderResponse;
