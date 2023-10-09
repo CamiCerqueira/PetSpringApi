@@ -11,6 +11,8 @@ O projeto deve atender aos seguintes requisitos:
 Implementar o endpoint de CRUD de costumer, leitura dos costumers cadastrados, atualização de informações e deleção do costumer.
 As informações geradas devem permitir o acesso a aplicação via login e autenticação via token.
 Alguns endpoints de buscas devem receber filtros opcionais e realizar consultas na camada de dados.
+
+
 Implementação
 
 O projeto foi implementado usando as seguintes tecnologias:
@@ -40,7 +42,6 @@ DELETE /customer/{id}: deleta um cliente
 
 Pet:
 POST /pet: cria um novo pet
-GET /pet: lista todos os pets
 GET /pet/{id}: busca um pet pelo ID
 PUT /pet/{id}: atualiza as informações de um pet
 DELETE /pet/{id}: deleta um pet
@@ -62,18 +63,15 @@ DELETE /typeProductService/{id}: deleta um tipo de serviço
 PetService:
 POST /petService: cria um novo serviço
 GET /petService: lista todos os serviços
-GET /petService/{id}: busca um serviço pelo ID
-PUT /petService/{id}: atualiza as informações de um serviço
-DELETE /petService/{id}: deleta um serviço
+DELETE /petService/{id}: deleta um serviço pelo ID
 
 
 Futuro
 
 O projeto ainda está em desenvolvimento e os seguintes itens estão previstos para serem implementados no futuro:
 
-Refinamento dos endpoints de Order e UserEmployee para associação de tabelas no banco de dados.
+Refinamento dos endpoints de UserEmployee.
 Implementação de testes unitários e de integração.
-Implementação de documentação da API.
 
 
 Conclusão
