@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface IPet extends JpaRepository<Pet, Integer> {
-     @Query(value =  "SELECT * FROM PETS WHERE ACTIVE = TRUE", nativeQuery = true)
-     Page<Pet> findAllActivePets(Pageable pageable);
+    @Query(value =  "SELECT * FROM PETS WHERE ACTIVE = TRUE", nativeQuery = true)
+    Page<Pet> findAllActivePets(Pageable pageable);
 
 
     List<Pet> findByBreed (String breed);
