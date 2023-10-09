@@ -55,10 +55,6 @@ public class CustomerService {
         Customer customer = (Customer) customerRepository.findByEmail(email);
        return CustomerConvert.toResponse(customer);
 
-        //public CustomerResponse getCustomerByEmail(String email){
-        //QCustomer qCustomer = QCustomer.customer;
-        //BooleanExpression booleanExpression= qCustomer.email.eq(qCustomer.email);
-        //return CustomerConvert.toResponse(Customer.findOne(booleanExpression).get());
     }
 
     public List<CustomerResponse> getAllByName(String name){

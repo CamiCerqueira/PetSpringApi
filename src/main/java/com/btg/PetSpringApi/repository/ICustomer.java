@@ -19,8 +19,6 @@ public interface ICustomer extends JpaRepository<Customer, Integer>, QuerydslPre
 
     UserDetails findByEmail(String email);
 
-    //Optional<Customer> findByEmail(String email);
-
     List<Customer> findAllByName (String name);
 
 }

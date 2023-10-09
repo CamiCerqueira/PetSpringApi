@@ -4,7 +4,6 @@ package com.btg.PetSpringApi.service;
 import com.btg.PetSpringApi.controller.dto.PetRequest;
 import com.btg.PetSpringApi.controller.dto.PetResponse;
 import com.btg.PetSpringApi.model.Pet;
-import com.btg.PetSpringApi.repository.ICustomer;
 import com.btg.PetSpringApi.repository.IPet;
 import com.btg.PetSpringApi.utils.PetConvert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +28,10 @@ public class PetService {
 
     }
 
-    public PetResponse savePet(PetRequest petDTO) {
-        Pet pet = PetConvert.toEntity(petDTO);
+    public PetResponse savePet(PetRequest petRequest) {
+        Pet pet = PetConvert.toEntity(petRequest);
         pet.setActive(true);
+        pet = petRepository.save(pet);
         return PetConvert.toResponse(pet);
     }
 
@@ -44,15 +44,20 @@ public class PetService {
         }
     }
 
-    public List<PetResponse> getAllByName(String name){
-        IPet petRepository = null;
-        return PetConvert.toResponseList(petRepository.findAllByName(name));
-    }
+//    public List<PetResponse> getAllByName(String name){
+//        IPet petRepository = null;
+//        return PetConvert.toResponseList(petRepository.findAllByName(name));
+//    }
+public List<PetResponse> getAllByName(String name){
+    List<Pet> pets = petRepository.findAllByName(name);
+    return PetConvert.toResponseList(pets);
+}
 
-    public List<PetResponse> getAllByBreed(String breed){
-        IPet petRepository = null;
-        return PetConvert.toResponseList(petRepository.findByBreed(breed));
-    }
+//
+public List<PetResponse> getAllByBreed(String breed){
+    List<Pet> pets = petRepository.findByBreed(breed);
+    return PetConvert.toResponseList(pets);
+}
 
     public void deletePet(Integer id){
         Pet pet = petRepository.findById(id).orElseThrow();
@@ -63,6 +68,7 @@ public class PetService {
     public PetResponse updatePet(Integer id, PetRequest petRequest){
         Pet pet = PetConvert.toEntity(petRequest);
         pet.setId(id);
+        pet = petRepository.save(pet);
         return PetConvert.toResponse(petRepository.save(pet));
     }
 }

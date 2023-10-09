@@ -16,6 +16,4 @@ public interface IPet extends JpaRepository<Pet, Integer> {
     List<Pet> findByBreed (String breed);
     List<Pet> findAllByName (String name);
 
-
-
 }
